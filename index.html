@@ -1,18 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant World</title>
-     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>🌱 Welcome to Plant World</h1>
-    <p>Duniya bhar ke plants yahan dekhein</p>
-   <input type="text" placeholder="Search plant...">
-    <div class="plant-card">
-    <h2>Aloe Vera</h2>
-    <p>Medicinal Plant</p>
-    <p>Low Water | Medium Sunlight</p>
-</div>
+    <header>
+        <h1>🌱 Welcome to Plant World</h1>
+        <p>Duniya bhar ke plants yahan dekhein</p>
+        <input type="text" id="search" placeholder="Search plant...">
+    </header>
+
+    <div class="plants-container">
+        
+        <div class="plant-card">
+            <img src="https://th.bing.com/th/id/OIF.CoXrMGKZGWG1OS05yZsEZA?w=278&h=186&c=7&r=0&o=7&pid=1.7&rm=3" alt="Aloe Vera">
+            <h2>Aleo Vera</h2>
+            <p class="category">Medicinal Plant</p>
+            <div class="info">💧 Low | ☀️ Medium</div>
+        </div>
+
+        <div class="plant-card">
+            <img src="https://th.bing.com/th?id=OIF.OCCI86KtCvSxMn%2fu%2bT7Xbw&w=335&h=175&c=7&r=0&o=7&pid=1.7&rm=3" alt="snake plant">
+            <h2>Snake Plant</h2>
+            <p class="category">Indoor Plant</p>
+            <div class="info">💧 Low | ☀️ Low</div>
+        </div>
+
+    </div>
+
 </body>
 </html>
