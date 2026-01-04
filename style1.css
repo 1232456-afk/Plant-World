@@ -88,3 +88,16 @@ footer .icon {
     width: 25px;
     height: 25px;
 }
+#site-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1f3d2b;
+    color: #ffffff;
+}
+
+.footer-tagline {
+    font-size: 14px;
+    margin: 6px 0;
+    opacity: 0.9;
+}
+
