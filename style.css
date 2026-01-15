@@ -56,3 +56,21 @@ h1 { color: #2d5a27; }
     color: #2d5a27;
     margin-top: 10px;
 }
+.live-datetime {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 12px 0;
+}
+
+#currentDate {
+  display: block;
+  color: #2e7d32;
+}
+
+#currentTime {
+  display: block;
+  color: #1565c0;
+  letter-spacing: 1px;
+}
