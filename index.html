@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Plant World</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+  }
+
+  /* STRIPES CONTAINER */
+  .stripes {
+    position: fixed;
+    inset: 0;
+    display: flex;
+  }
+
+  .stripe {
+    flex: 1;
+    animation: moveStripe 5s linear infinite;
+  }
+
+  .stripe:nth-child(1) { background: #2e7d32; animation-delay: 0s; }
+  .stripe:nth-child(2) { background: #43a047; animation-delay: 0.3s; }
+  .stripe:nth-child(3) { background: #66bb6a; animation-delay: 0.6s; }
+  .stripe:nth-child(4) { background: #81c784; animation-delay: 0.9s; }
+  .stripe:nth-child(5) { background: #a5d6a7; animation-delay: 1.2s; }
+
+  @keyframes moveStripe {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(-100%); }
+  }
+
+  /* CENTER BOX */
+  .welcome-box {
+    position: relative;
+    z-index: 2;
+    background: rgba(255,255,255,0.92);
+    padding: 30px 45px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  }
+
+  .welcome-box h1 {
+    margin: 0;
+    font-size: 26px;
+    color: #2e7d32;
+  }
+
+  .welcome-box p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #555;
+  }
+
+  .center {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- COLOR STRIPES -->
+<div class="stripes">
+  <div class="stripe"></div>
+  <div class="stripe"></div>
+  <div class="stripe"></div>
+  <div class="stripe"></div>
+  <div class="stripe"></div>
+</div>
+
+<!-- WELCOME CONTENT -->
+<div class="center">
+  <div class="welcome-box">
+    <h1 id="welcomeMsg"></h1>
+    <p>Welcome to Plant World 🌱</p>
+  </div>
+</div>
+
+<script>
+  const hour = new Date().getHours();
+  let msg = "Welcome";
+
+  if (hour < 12) msg = "Good Morning ☀️";
+  else if (hour < 17) msg = "Good Afternoon 🌿";
+  else if (hour < 20) msg = "Good Evening 🌸";
+  else msg = "Good Night 🌙";
+
+  document.getElementById("welcomeMsg").innerText = msg;
+
+  // Redirect after 5 seconds
+  setTimeout(() => {
+    window.location.href = "home.html";
+  }, 5000);
+</script>
+
+</body>
+</html>
