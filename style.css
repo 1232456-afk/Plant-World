@@ -39,7 +39,7 @@ h1 { color: #2d5a27; }
 
 /* Hover lift */
 .plant-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
 
 }
 
