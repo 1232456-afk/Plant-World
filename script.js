@@ -24,7 +24,7 @@
 function buyPlant(plantName) {
 
     // Daraz Search
-    const url = `https://www.plant.pk/catalog/?q=${plantName}+plant`;
+    const url = `https://www.plant.pk/search?controller=search&s=${encodeURIComponent(plantName)}+plant`;
 
     // New Tab Open
     window.open(url, "_blank");
