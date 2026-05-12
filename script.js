@@ -20,3 +20,12 @@
 
   showDateTime();
   setInterval(showDateTime, 1000);
+
+function buyPlant(plantName) {
+
+    // Daraz Search
+    const url = `https://www.daraz.pk/catalog/?q=${plantName}+plant`;
+
+    // New Tab Open
+    window.open(url, "_blank");
+}
