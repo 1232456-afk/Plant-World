@@ -26,24 +26,24 @@ h1 { color: #2d5a27; }
 }
 
 .plant-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
     background: white;
     width: 250px;
     padding: 15px;
-    border-radius: 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s; 
+    transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
 }
 
-/* Card hover effect */
+/* Hover lift */
 .plant-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
-/* Animated border line */
+/* Pseudo-element for border only */
 .plant-card::before {
     content: "";
     position: absolute;
@@ -53,26 +53,27 @@ h1 { color: #2d5a27; }
     height: calc(100% + 4px);
     border-radius: 20px;
     border: 2px solid transparent;
-    background: linear-gradient(90deg, #90EE90, #32CD32, #90EE90);
-    background-size: 200% 100%;
     pointer-events: none;
+    
+    /* Only border gradient, not background */
+    border-image: linear-gradient(90deg, #90EE90, #32CD32, #90EE90) 1;
+    
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-/* Show and animate border on hover */
+/* Show and animate on hover */
 .plant-card:hover::before {
     opacity: 1;
     animation: borderMove 2s linear infinite;
 }
 
-/* Keyframes for horizontal moving border */
+/* Keyframes for border animation */
 @keyframes borderMove {
-    0% { background-position: 0% 0%; }
-    50% { background-position: 100% 0%; }
-    100% { background-position: 0% 0%; }
+    0% { border-image-slice: 1; border-image-width: 2px; border-image-outset: 0; border-image-source: linear-gradient(90deg, #90EE90, #32CD32, #90EE90); }
+    50% { border-image-source: linear-gradient(270deg, #90EE90, #32CD32, #90EE90); }
+    100% { border-image-source: linear-gradient(90deg, #90EE90, #32CD32, #90EE90); }
 }
-
 .plant-card img {
     width: 100%;
     border-radius: 10px;
