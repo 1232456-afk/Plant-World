@@ -29,13 +29,60 @@ h1 { color: #2d5a27; }
     background: white;
     width: 250px;
     padding: 15px;
-    border-radius: 15px;
+    border-radius: 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s; /* Hover effect */
+    cursor:pointer;
+      position: relative;
+    overflow: hidden;
+    background: #fff;
+    transition: 0.3s ease;
 }
 
 .plant-card:hover {
     transform: translateY(-5px); /* Card thoda upar uthega */
+     box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* Animated border line */
+.plant-card::before{
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 20px;
+    padding: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #90ee90,
+        transparent
+    );
+
+    background-size: 300% 300%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    /* border effect */
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+}
+
+/* Animation on hover */
+.plant-card:hover::before{
+    opacity: 1;
+    animation: borderMove 2s linear infinite;
+}
+
+@keyframes borderMove{
+    0%{
+        background-position: 0% 50%;
+    }
+    100%{
+        background-position: 300% 50%;
+    }
 }
 
 .plant-card img {
@@ -73,13 +120,4 @@ h1 { color: #2d5a27; }
   display: block;
   color: #1565c0;
   letter-spacing: 1px;
-}
-
-.plant-card{
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.plant-card:hover{
-    transform: scale(1.05);
 }
