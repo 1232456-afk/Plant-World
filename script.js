@@ -24,7 +24,7 @@
 function buyPlant(plantName) {
 
     // Daraz Search
-    const url = `https://loam.pk/?s=${encodeURIComponent(plantName)}`;
+     https://www.google.com/search?q=site:plant.pk+${encodeURIComponent(plantName)}+plant;
 
     // New Tab Open
     window.open(url, "_blank");
