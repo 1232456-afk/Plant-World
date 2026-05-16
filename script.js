@@ -24,7 +24,7 @@
 function buyPlant(plantName) {
 
     // Daraz Search
-    const url = `https://www.google.com/search?q=site:plant.pk+${encodeURIComponent(plantName)}+plant`;
+    const url = `https://gardener.pk/?s=${encodeURIComponent(plantName)}`;
 
     // New Tab Open
     window.open(url, "_blank");
