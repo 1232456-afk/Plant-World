@@ -22,10 +22,6 @@
   setInterval(showDateTime, 1000);
 
 function buyPlant(plantName) {
-
-    // Daraz Search
-     https://www.google.com/search?q=site:plant.pk+${encodeURIComponent(plantName)}+plant;
-
-    // New Tab Open
+    const url = `https://www.google.com/search?q=site:plant.pk+${encodeURIComponent(plantName)}+plant`;
     window.open(url, "_blank");
 }
