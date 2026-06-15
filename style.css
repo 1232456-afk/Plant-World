@@ -1,83 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --green-deep: #1a3a2a;
+  --green-mid: #2d6a4f;
+  --green-bright: #40916c;
+  --green-light: #74c69d;
+  --green-pale: #b7e4c7;
+  --cream: #f8f5f0;
+  --white: #ffffff;
+  --gold: #c9a84c;
+  --text-dark: #1a2418;
+  --text-mid: #3d5a3e;
+  --text-light: #6b8f71;
+  --shadow-sm: 0 4px 16px rgba(26,58,42,0.10);
+  --shadow-md: 0 8px 32px rgba(26,58,42,0.15);
+  --shadow-lg: 0 20px 60px rgba(26,58,42,0.20);
+  --radius: 20px;
+  --radius-sm: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f7f0;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
+  font-family: 'Inter', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  min-height: 100vh;
 }
 
-h1 { color: #2d5a27; }
+/* DATETIME BAR */
+.datetime-bar {
+  background: var(--green-deep);
+  color: var(--green-pale);
+  text-align: center;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.datetime-bar #currentDate { color: var(--green-pale); }
+.datetime-bar #currentTime { color: var(--gold); font-weight: 600; }
 
-#search {
-    padding: 10px;
-    width: 300px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    margin-bottom: 30px;
-    outline: none;
+/* HEADER */
+header.page-header {
+  background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%);
+  padding: 36px 24px 28px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+header.page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2340916c' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+header.page-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--white);
+  position: relative;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+header.page-header p {
+  color: var(--green-pale);
+  font-size: 1rem;
+  margin-top: 8px;
+  position: relative;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.15);
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 16px;
+  position: relative;
+  transition: all 0.3s;
+  backdrop-filter: blur(8px);
+}
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateX(-3px);
 }
 
-/* Flexbox for the grid layout */
+/* SEARCH BAR */
+.search-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 28px 20px 8px;
+}
+.search-wrap input {
+  width: 100%;
+  max-width: 480px;
+  padding: 14px 22px;
+  border-radius: 50px;
+  border: 2px solid var(--green-pale);
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  background: var(--white);
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.search-wrap input:focus {
+  border-color: var(--green-bright);
+  box-shadow: 0 0 0 4px rgba(64,145,108,0.12);
+}
+
+/* PLANT GRID */
 .plants-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  padding: 24px 28px 48px;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
+/* PLANT CARD */
 .plant-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-    background: white;
-    width: 250px;
-    padding: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.35s cubic-bezier(.22,.68,0,1.2), box-shadow 0.35s;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid rgba(116,198,157,0.2);
 }
-
-/* Hover lift */
 .plant-card:hover {
-    transform: translateY(-8px);
-
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-lg);
 }
-
-
+.plant-card .img-wrap {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
 .plant-card img {
-    width: 100%;
-    border-radius: 10px;
-    height: 180px;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.plant-card:hover img { transform: scale(1.08); }
+
+.plant-card .card-body {
+  padding: 16px 18px 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.plant-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: var(--green-deep);
+  font-weight: 700;
+}
+.plant-card .category {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--text-light);
+  font-weight: 400;
+}
+.plant-card .info {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green-mid);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.plant-card .info span {
+  background: rgba(64,145,108,0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+.buy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: auto;
+  background: linear-gradient(135deg, var(--green-bright), var(--green-mid));
+  color: var(--white);
+  padding: 10px 16px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  letter-spacing: 0.3px;
+}
+.buy-btn:hover {
+  background: linear-gradient(135deg, var(--green-mid), var(--green-deep));
+  transform: scale(1.03);
+  box-shadow: 0 4px 16px rgba(45,106,79,0.35);
 }
 
-.category {
-    color: #666;
-    font-style: italic;
-    font-size: 0.9em;
+/* FOOTER */
+footer.main-footer {
+  background: var(--green-deep);
+  color: var(--green-pale);
+  padding: 40px 24px;
+  text-align: center;
+}
+footer.main-footer h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+footer.main-footer .contact-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0;
+  font-size: 15px;
+  flex-wrap: wrap;
+}
+footer.main-footer .contact-row a {
+  color: var(--green-pale);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+footer.main-footer .contact-row a:hover { color: var(--gold); }
+.footer-icon {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  border-radius: 6px;
+}
+.footer-icon:hover { transform: scale(1.25); }
+footer.tagline-footer {
+  background: #0f2318;
+  color: rgba(183,228,199,0.7);
+  text-align: center;
+  padding: 14px;
+  font-size: 13px;
+  line-height: 1.8;
 }
 
-.info {
-    font-weight: bold;
-    color: #2d5a27;
-    margin-top: 10px;
-}
-
-.live-datetime {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    margin: 12px 0;
-}
-
-#currentDate {
-    display: block;
-    color: #2e7d32;
-}
-
-#currentTime {
-    display: block;
-    color: #1565c0;
-    letter-spacing: 1px;
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .plants-container { padding: 16px 14px 36px; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .plant-card .img-wrap { height: 150px; }
+  .plant-card .card-body { padding: 12px 14px 14px; }
+  .plant-card h2 { font-size: 1rem; }
 }
