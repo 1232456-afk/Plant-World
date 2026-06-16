@@ -1,106 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plant World 🌿</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style1.css">
 </head>
 <body>
-
-<!-- DATETIME BAR -->
-<div class="datetime-bar">
-  <span id="currentDate"></span>
-  <span id="currentTime"></span>
-</div>
-
-<!-- HERO -->
+<div class="datetime-bar"><span id="currentDate"></span><span id="currentTime"></span></div>
 <header class="hero">
   <h1>🌿 Welcome to Plant World</h1>
   <p>Explore the beauty of plants from around the world</p>
 </header>
-
-<!-- CATEGORIES -->
 <section class="cat-section">
   <p class="section-label">Browse by Category</p>
   <h2 class="section-title">What are you looking for?</h2>
   <div class="cat-grid">
-
+    
     <a href="indoor.html" class="cat-card">
-      <img class="cat-img" src="https://images.unsplash.com/photo-1463320726281-696a485928c7?w=600&q=80" alt="Indoor Plants">
-      <div class="cat-body">
-        <h2>🪴 Indoors Plants</h2>
-        <p>Perfect for home & office spaces. Low maintenance, high beauty.</p>
-        <span class="cat-arrow">Explore →</span>
-      </div>
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMjYwIj4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyNjAiIGZpbGw9IiNjOGU2YzkiLz4KPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjI0MCIgcng9IjgwIiByeT0iMjAiIGZpbGw9IiM0YTdjNTkiIG9wYWNpdHk9IjAuNCIvPgo8cmVjdCB4PSIxODgiIHk9IjE4MCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjgwIiByeD0iOCIgZmlsbD0iIzVkNDAzNyIvPgo8cmVjdCB4PSIxOTMiIHk9IjIwMCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjYwIiByeD0iNSIgZmlsbD0iIzZkNGM0MSIvPgo8IS0tIGJpZyBsZWF2ZXMgLS0+CjxlbGxpcHNlIGN4PSIyMDAiIGN5PSIxNTAiIHJ4PSI1NSIgcnk9IjQyIiBmaWxsPSIjMmU3ZDMyIiB0cmFuc2Zvcm09InJvdGF0ZSgtMjAgMjAwIDE1MCkiLz4KPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjE0OCIgcng9IjUwIiByeT0iMzgiIGZpbGw9IiMzODhlM2MiIHRyYW5zZm9ybT0icm90YXRlKC0yMCAyMDAgMTQ4KSIvPgo8bGluZSB4MT0iMjAwIiB5MT0iMTgwIiB4Mj0iMTg1IiB5Mj0iMTI1IiBzdHJva2U9IiMxYjVlMjAiIHN0cm9rZS13aWR0aD0iMiIvPgo8ZWxsaXBzZSBjeD0iMTUwIiBjeT0iMTMwIiByeD0iNDgiIHJ5PSIzNiIgZmlsbD0iIzJlN2QzMiIgdHJhbnNmb3JtPSJyb3RhdGUoMTUgMTUwIDEzMCkiLz4KPGVsbGlwc2UgY3g9IjE1MCIgY3k9IjEyOCIgcng9IjQzIiByeT0iMzIiIGZpbGw9IiM0M2EwNDciIHRyYW5zZm9ybT0icm90YXRlKDE1IDE1MCAxMjgpIi8+CjxsaW5lIHgxPSIxODAiIHkxPSIxODUiIHgyPSIxNTUiIHkyPSIxNDUiIHN0cm9rZT0iIzFiNWUyMCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxlbGxpcHNlIGN4PSIyNTUiIGN5PSIxMjAiIHJ4PSI1MCIgcnk9IjM4IiBmaWxsPSIjMWI1ZTIwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzUgMjU1IDEyMCkiLz4KPGVsbGlwc2UgY3g9IjI1NSIgY3k9IjExOCIgcng9IjQ1IiByeT0iMzQiIGZpbGw9IiMyZTdkMzIiIHRyYW5zZm9ybT0icm90YXRlKC0zNSAyNTUgMTE4KSIvPgo8bGluZSB4MT0iMjAwIiB5MT0iMTc1IiB4Mj0iMjQ4IiB5Mj0iMTM1IiBzdHJva2U9IiMxYjVlMjAiIHN0cm9rZS13aWR0aD0iMiIvPgo8ZWxsaXBzZSBjeD0iMTc1IiBjeT0iOTUiIHJ4PSI0NCIgcnk9IjMzIiBmaWxsPSIjMzg4ZTNjIiB0cmFuc2Zvcm09InJvdGF0ZSgyNSAxNzUgOTUpIi8+CjxlbGxpcHNlIGN4PSIxNzUiIGN5PSI5MyIgcng9IjM5IiByeT0iMjkiIGZpbGw9IiM0Y2FmNTAiIHRyYW5zZm9ybT0icm90YXRlKDI1IDE3NSA5MykiLz4KPGVsbGlwc2UgY3g9IjIzNSIgY3k9IjgwIiByeD0iNDIiIHJ5PSIzMiIgZmlsbD0iIzJlN2QzMiIgdHJhbnNmb3JtPSJyb3RhdGUoLTEwIDIzNSA4MCkiLz4KPGVsbGlwc2UgY3g9IjIzNSIgY3k9Ijc4IiByeD0iMzciIHJ5PSIyOCIgZmlsbD0iIzM4OGUzYyIgdHJhbnNmb3JtPSJyb3RhdGUoLTEwIDIzNSA3OCkiLz4KPCEtLSB5ZWxsb3cgdmFyaWVnYXRpb24gLS0+CjxlbGxpcHNlIGN4PSIyMDAiIGN5PSIxNDgiIHJ4PSIxNSIgcnk9IjEwIiBmaWxsPSIjYzhlNmM5IiBvcGFjaXR5PSIwLjUiIHRyYW5zZm9ybT0icm90YXRlKC0yMCAyMDAgMTQ4KSIvPgo8ZWxsaXBzZSBjeD0iMTUwIiBjeT0iMTI2IiByeD0iMTMiIHJ5PSI5IiBmaWxsPSIjYzhlNmM5IiBvcGFjaXR5PSIwLjQiIHRyYW5zZm9ybT0icm90YXRlKDE1IDE1MCAxMjYpIi8+CjwhLS0gcG90IC0tPgo8cGF0aCBkPSJNMTY1IDIyMCBRMTY1IDI2MCAyMzUgMjYwIFEzMDUgMjYwIDIzNSAyMjAgWiIgZmlsbD0iIzhkNmU2MyIvPgo8cmVjdCB4PSIxNTUiIHk9IjIwNSIgd2lkdGg9IjkwIiBoZWlnaHQ9IjIwIiByeD0iNSIgZmlsbD0iIzc5NTU0OCIvPgo8L3N2Zz4=" class="cat-img" alt="money_plant">
+      <div class="cat-body"><h2>🪴 Indoors Plants</h2><p>Perfect for home & office spaces. Low maintenance, high beauty.</p><span class="cat-arrow">Explore →</span></div>
     </a>
-
+    
     <a href="outdoor.html" class="cat-card">
-      <img class="cat-img" src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80" alt="Outdoor Plants">
-      <div class="cat-body">
-        <h2>🌳 Outdoor Plants</h2>
-        <p>Transform your garden with lush, vibrant outdoor greenery.</p>
-        <span class="cat-arrow">Explore →</span>
-      </div>
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMjYwIj4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyNjAiIGZpbGw9IiNmY2U0ZWMiLz4KPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjI0OCIgcng9IjYwIiByeT0iMTIiIGZpbGw9IiMzODhlM2MiIG9wYWNpdHk9IjAuMyIvPgo8bGluZSB4MT0iMjAwIiB5MT0iMjQ4IiB4Mj0iMjAwIiB5Mj0iMTQwIiBzdHJva2U9IiMyZTdkMzIiIHN0cm9rZS13aWR0aD0iNSIvPgo8ZWxsaXBzZSBjeD0iMTcwIiBjeT0iMTkwIiByeD0iMjUiIHJ5PSIxMiIgZmlsbD0iIzJlN2QzMiIgdHJhbnNmb3JtPSJyb3RhdGUoLTMwIDE3MCAxOTApIi8+CjxlbGxpcHNlIGN4PSIyMzAiIGN5PSIxNzUiIHJ4PSIyNSIgcnk9IjEyIiBmaWxsPSIjMzg4ZTNjIiB0cmFuc2Zvcm09InJvdGF0ZSgzMCAyMzAgMTc1KSIvPgo8IS0tIHJvc2UgYmxvb20gLS0+CjxjaXJjbGUgY3g9IjIwMCIgY3k9IjEwNSIgcj0iNTgiIGZpbGw9IiNlOTFlNjMiLz4KPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTA4IiByPSI1MCIgZmlsbD0iI2MyMTg1YiIvPgo8ZWxsaXBzZSBjeD0iMjAwIiBjeT0iOTgiIHJ4PSIzMCIgcnk9IjIyIiBmaWxsPSIjZTkxZTYzIiB0cmFuc2Zvcm09InJvdGF0ZSgwKSIvPgo8ZWxsaXBzZSBjeD0iMjE4IiBjeT0iMTEyIiByeD0iMjgiIHJ5PSIyMCIgZmlsbD0iI2Q4MWI2MCIgdHJhbnNmb3JtPSJyb3RhdGUoNjAgMjE4IDExMikiLz4KPGVsbGlwc2UgY3g9IjE4MiIgY3k9IjExMiIgcng9IjI4IiByeT0iMjAiIGZpbGw9IiNjMjE4NWIiIHRyYW5zZm9ybT0icm90YXRlKC02MCAxODIgMTEyKSIvPgo8ZWxsaXBzZSBjeD0iMjAwIiBjeT0iMTE1IiByeD0iMjgiIHJ5PSIyMCIgZmlsbD0iI2U5MWU2MyIgdHJhbnNmb3JtPSJyb3RhdGUoMTgwKSIvPgo8ZWxsaXBzZSBjeD0iMjIwIiBjeT0iOTgiIHJ4PSIyNCIgcnk9IjE4IiBmaWxsPSIjZjA2MjkyIiB0cmFuc2Zvcm09InJvdGF0ZSgzMCAyMjAgOTgpIi8+CjxlbGxpcHNlIGN4PSIxODAiIGN5PSI5OCIgcng9IjI0IiByeT0iMTgiIGZpbGw9IiNlOTFlNjMiIHRyYW5zZm9ybT0icm90YXRlKC0zMCAxODAgOTgpIi8+CjxjaXJjbGUgY3g9IjIwMCIgY3k9IjEwOCIgcj0iMzAiIGZpbGw9IiNjMjE4NWIiLz4KPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTA4IiByPSIyMCIgZmlsbD0iI2FkMTQ1NyIvPgo8ZWxsaXBzZSBjeD0iMjAwIiBjeT0iMTAyIiByeD0iMTQiIHJ5PSIxMCIgZmlsbD0iI2MyMTg1YiIvPgo8ZWxsaXBzZSBjeD0iMjA4IiBjeT0iMTEwIiByeD0iMTMiIHJ5PSI5IiBmaWxsPSIjZDgxYjYwIiB0cmFuc2Zvcm09InJvdGF0ZSg2MCAyMDggMTEwKSIvPgo8ZWxsaXBzZSBjeD0iMTkyIiBjeT0iMTEwIiByeD0iMTMiIHJ5PSI5IiBmaWxsPSIjYWQxNDU3IiB0cmFuc2Zvcm09InJvdGF0ZSgtNjAgMTkyIDExMCkiLz4KPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTA4IiByPSI4IiBmaWxsPSIjODgwZTRmIi8+Cjwvc3ZnPg==" class="cat-img" alt="rose">
+      <div class="cat-body"><h2>🌳 Outdoor Plants</h2><p>Transform your garden with lush, vibrant outdoor greenery.</p><span class="cat-arrow">Explore →</span></div>
     </a>
-
+    
     <a href="cactus.html" class="cat-card">
-      <img class="cat-img" src="https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=600&q=80" alt="Cactus">
-      <div class="cat-body">
-        <h2>🌵 Cactus & Succulents</h2>
-        <p>Drought-tolerant beauties that thrive with minimal care.</p>
-        <span class="cat-arrow">Explore →</span>
-      </div>
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMjYwIj4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyNjAiIGZpbGw9IiNmOWZiZTciLz4KPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjI0OCIgcng9IjY1IiByeT0iMTIiIGZpbGw9IiM1NThiMmYiIG9wYWNpdHk9IjAuMjUiLz4KPHBhdGggZD0iTTE3MiAyMjIgUTE2OCAyNTggMjAwIDI2MCBRMjMyIDI1OCAyMjggMjIyIFoiIGZpbGw9IiNhMTg4N2YiLz4KPHJlY3QgeD0iMTY0IiB5PSIyMTMiIHdpZHRoPSI3MiIgaGVpZ2h0PSIxMyIgcng9IjUiIGZpbGw9IiM4ZDZlNjMiLz4KPCEtLSBhbG9lIGxlYXZlcyAtIHRoaWNrIHN1Y2N1bGVudCAtLT4KPHBhdGggZD0iTTIwMCAyMjAgUTE3MCAxOTAgMTQ1IDEyMCBRMTM4IDk1IDE0OCA4NSBRMTU1IDc4IDE2MCA5NSBRMTcyIDE0NSAyMDAgMTg1IFoiIGZpbGw9IiM1NThiMmYiLz4KPHBhdGggZD0iTTIwMCAyMjAgUTE3MCAxOTAgMTQ1IDEyMCBRMTM4IDk1IDE0OCA4NSBRMTU1IDc4IDE2MCA5NSBRMTcyIDE0NSAyMDAgMTg1IFoiIGZpbGw9IiM2ODlmMzgiIG9wYWNpdHk9IjAuNyIvPgo8IS0tIHNwaW5lcyAtLT4KPGxpbmUgeDE9IjE0OCIgeTE9IjEwMCIgeDI9IjE0NCIgeTI9Ijk1IiBzdHJva2U9IiMzMzY5MWUiIHN0cm9rZS13aWR0aD0iMS41Ii8+CjxsaW5lIHgxPSIxNTIiIHkxPSIxMTIiIHgyPSIxNDciIHkyPSIxMDgiIHN0cm9rZT0iIzMzNjkxZSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPGxpbmUgeDE9IjE1NiIgeTE9IjEyNSIgeDI9IjE1MCIgeTI9IjEyMiIgc3Ryb2tlPSIjMzM2OTFlIiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8bGluZSB4MT0iMTYwIiB5MT0iMTQwIiB4Mj0iMTU0IiB5Mj0iMTM4IiBzdHJva2U9IiMzMzY5MWUiIHN0cm9rZS13aWR0aD0iMS41Ii8+CjxwYXRoIGQ9Ik0yMDAgMjIwIFEyMzAgMTkwIDI1NSAxMjAgUTI2MiA5NSAyNTIgODUgUTI0NSA3OCAyNDAgOTUgUTIyOCAxNDUgMjAwIDE4NSBaIiBmaWxsPSIjNTU4YjJmIi8+CjxwYXRoIGQ9Ik0yMDAgMjIwIFEyMzAgMTkwIDI1NSAxMjAgUTI2MiA5NSAyNTIgODUgUTI0NSA3OCAyNDAgOTUgUTIyOCAxNDUgMjAwIDE4NSBaIiBmaWxsPSIjN2NiMzQyIiBvcGFjaXR5PSIwLjciLz4KPGxpbmUgeDE9IjI1MiIgeTE9IjEwMCIgeDI9IjI1NiIgeTI9Ijk1IiBzdHJva2U9IiMzMzY5MWUiIHN0cm9rZS13aWR0aD0iMS41Ii8+CjxsaW5lIHgxPSIyNDgiIHkxPSIxMTIiIHgyPSIyNTMiIHkyPSIxMDgiIHN0cm9rZT0iIzMzNjkxZSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPGxpbmUgeDE9IjI0NCIgeTE9IjEyNSIgeDI9IjI1MCIgeTI9IjEyMiIgc3Ryb2tlPSIjMzM2OTFlIiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8cGF0aCBkPSJNMjAwIDIyMCBRMTg1IDE4NSAxNzggMTEwIFExNzYgODUgMTg1IDc4IFExOTMgNzMgMTk1IDkwIFExOTggMTU1IDIwMCAxOTAgWiIgZmlsbD0iIzMzNjkxZSIvPgo8cGF0aCBkPSJNMjAwIDIyMCBRMjE1IDE4NSAyMjIgMTEwIFEyMjQgODUgMjE1IDc4IFEyMDcgNzMgMjA1IDkwIFEyMDIgMTU1IDIwMCAxOTAgWiIgZmlsbD0iIzMzNjkxZSIvPgo8cGF0aCBkPSJNMjAwIDIyMCBRMTgwIDIwMCAxNjggMTUwIFExNjIgMTIwIDE3MCAxMDUgUTE3OCA5MyAxODIgMTEwIFExOTAgMTYwIDIwMCAyMDAgWiIgZmlsbD0iIzU1OGIyZiIvPgo8cGF0aCBkPSJNMjAwIDIyMCBRMjIwIDIwMCAyMzIgMTUwIFEyMzggMTIwIDIzMCAxMDUgUTIyMiA5MyAyMTggMTEwIFEyMTAgMTYwIDIwMCAyMDAgWiIgZmlsbD0iIzU1OGIyZiIvPgo8L3N2Zz4=" class="cat-img" alt="aloe_vera">
+      <div class="cat-body"><h2>🌵 Cactus & Succulents</h2><p>Drought-tolerant beauties that thrive with minimal care.</p><span class="cat-arrow">Explore →</span></div>
     </a>
-
+    
     <a href="flowering.html" class="cat-card">
-      <img class="cat-img" src="https://stock.adobe.com/images/beautiful-flowers-in-the-tropical-forest-front-view/616349295" alt="Flowering Plants">
-      <div class="cat-body">
-        <h2>🌸 Flowering Plants</h2>
-        <p>Add colors and fragrance to your space with blooming plants.</p>
-        <span class="cat-arrow">Explore →</span>
-      </div>
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMjYwIj4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyNjAiIGZpbGw9IiNmZmY4ZTEiLz4KPGxpbmUgeDE9IjIwMCIgeTE9IjI0OCIgeDI9IjIwMCIgeTI9IjE0MCIgc3Ryb2tlPSIjMzM2OTFlIiBzdHJva2Utd2lkdGg9IjUiLz4KPGVsbGlwc2UgY3g9IjE2OCIgY3k9IjE5NSIgcng9IjIyIiByeT0iMTAiIGZpbGw9IiMyZTdkMzIiIHRyYW5zZm9ybT0icm90YXRlKC0yNSAxNjggMTk1KSIvPgo8ZWxsaXBzZSBjeD0iMjMyIiBjeT0iMTgwIiByeD0iMjIiIHJ5PSIxMCIgZmlsbD0iIzM4OGUzYyIgdHJhbnNmb3JtPSJyb3RhdGUoMjUgMjMyIDE4MCkiLz4KPCEtLSBtYXJpZ29sZCBwZXRhbHMgLS0+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwMCwxMDUpIj4KPGVsbGlwc2Ugcng9IjEyIiByeT0iMzgiIGZpbGw9IiNmNTdmMTciIHRyYW5zZm9ybT0icm90YXRlKDApIi8+CjxlbGxpcHNlIHJ4PSIxMiIgcnk9IjM4IiBmaWxsPSIjZjlhODI1IiB0cmFuc2Zvcm09InJvdGF0ZSgyMi41KSIvPgo8ZWxsaXBzZSByeD0iMTIiIHJ5PSIzOCIgZmlsbD0iI2Y1N2YxNyIgdHJhbnNmb3JtPSJyb3RhdGUoNDUpIi8+CjxlbGxpcHNlIHJ4PSIxMiIgcnk9IjM4IiBmaWxsPSIjZmJjMDJkIiB0cmFuc2Zvcm09InJvdGF0ZSg2Ny41KSIvPgo8ZWxsaXBzZSByeD0iMTIiIHJ5PSIzOCIgZmlsbD0iI2Y1N2YxNyIgdHJhbnNmb3JtPSJyb3RhdGUoOTApIi8+CjxlbGxpcHNlIHJ4PSIxMiIgcnk9IjM4IiBmaWxsPSIjZjlhODI1IiB0cmFuc2Zvcm09InJvdGF0ZSgxMTIuNSkiLz4KPGVsbGlwc2Ugcng9IjEyIiByeT0iMzgiIGZpbGw9IiNlZjZjMDAiIHRyYW5zZm9ybT0icm90YXRlKDEzNSkiLz4KPGVsbGlwc2Ugcng9IjEyIiByeT0iMzgiIGZpbGw9IiNmOWE4MjUiIHRyYW5zZm9ybT0icm90YXRlKDE1Ny41KSIvPgo8ZWxsaXBzZSByeD0iMTEiIHJ5PSIzMCIgZmlsbD0iI2ZiYzAyZCIgdHJhbnNmb3JtPSJyb3RhdGUoMTEpIi8+CjxlbGxpcHNlIHJ4PSIxMSIgcnk9IjMwIiBmaWxsPSIjZjlhODI1IiB0cmFuc2Zvcm09InJvdGF0ZSgzMykiLz4KPGVsbGlwc2Ugcng9IjExIiByeT0iMzAiIGZpbGw9IiNmNTdmMTciIHRyYW5zZm9ybT0icm90YXRlKDU1KSIvPgo8ZWxsaXBzZSByeD0iMTEiIHJ5PSIzMCIgZmlsbD0iI2ZiYzAyZCIgdHJhbnNmb3JtPSJyb3RhdGUoNzcpIi8+CjxlbGxpcHNlIHJ4PSIxMSIgcnk9IjMwIiBmaWxsPSIjZWY2YzAwIiB0cmFuc2Zvcm09InJvdGF0ZSg5OSkiLz4KPGVsbGlwc2Ugcng9IjExIiByeT0iMzAiIGZpbGw9IiNmOWE4MjUiIHRyYW5zZm9ybT0icm90YXRlKDEyMSkiLz4KPGVsbGlwc2Ugcng9IjExIiByeT0iMzAiIGZpbGw9IiNmNTdmMTciIHRyYW5zZm9ybT0icm90YXRlKDE0MykiLz4KPGVsbGlwc2Ugcng9IjExIiByeT0iMzAiIGZpbGw9IiNmYmMwMmQiIHRyYW5zZm9ybT0icm90YXRlKDE2NSkiLz4KPGNpcmNsZSByPSIyMiIgZmlsbD0iI2U2NTEwMCIvPgo8Y2lyY2xlIHI9IjE2IiBmaWxsPSIjZWY2YzAwIi8+CjxjaXJjbGUgcj0iMTAiIGZpbGw9IiNmNTdmMTciLz4KPC9nPgo8L3N2Zz4=" class="cat-img" alt="marigold">
+      <div class="cat-body"><h2>🌸 Flowering Plants</h2><p>Add colors and fragrance to your space with blooming plants.</p><span class="cat-arrow">Explore →</span></div>
     </a>
-
+    
     <a href="herbs.html" class="cat-card">
-      <img class="cat-img" src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=600&q=80" alt="Herbs">
-      <div class="cat-body">
-        <h2>🌿 Herbs & Medicinal</h2>
-        <p>Natural healing plants you can grow right in your kitchen.</p>
-        <span class="cat-arrow">Explore →</span>
-      </div>
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMjYwIj4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyNjAiIGZpbGw9IiNlOGY1ZTkiLz4KPHBhdGggZD0iTTE3MiAyMjggUTE2OCAyNTggMjAwIDI2MCBRMjMyIDI1OCAyMjggMjI4IFoiIGZpbGw9IiM3OTU1NDgiLz4KPHJlY3QgeD0iMTY0IiB5PSIyMTgiIHdpZHRoPSI3MiIgaGVpZ2h0PSIxMyIgcng9IjUiIGZpbGw9IiM2ZDRjNDEiLz4KPGxpbmUgeDE9IjIwMCIgeTE9IjIxOCIgeDI9IjIwMCIgeTI9IjEwMCIgc3Ryb2tlPSIjMzM2OTFlIiBzdHJva2Utd2lkdGg9IjUiLz4KPCEtLSBicmFuY2hlcyAtLT4KPGxpbmUgeDE9IjIwMCIgeTE9IjE4MCIgeDI9IjE1NSIgeTI9IjE0NSIgc3Ryb2tlPSIjMzg4ZTNjIiBzdHJva2Utd2lkdGg9IjMiLz4KPGxpbmUgeDE9IjIwMCIgeTE9IjE2MCIgeDI9IjI0NSIgeTI9IjEyOCIgc3Ryb2tlPSIjMmU3ZDMyIiBzdHJva2Utd2lkdGg9IjMiLz4KPGxpbmUgeDE9IjIwMCIgeTE9IjE0MCIgeDI9IjE1OCIgeTI9IjExMCIgc3Ryb2tlPSIjMzM2OTFlIiBzdHJva2Utd2lkdGg9IjMiLz4KPGxpbmUgeDE9IjIwMCIgeTE9IjEyNSIgeDI9IjI0MiIgeTI9IjEwMCIgc3Ryb2tlPSIjMzg4ZTNjIiBzdHJva2Utd2lkdGg9IjMiLz4KPCEtLSBsZWF2ZXMgLSBvdmFsIHNlcnJhdGVkIC0tPgo8ZWxsaXBzZSBjeD0iMTQ4IiBjeT0iMTM1IiByeD0iMjQiIHJ5PSIxNCIgZmlsbD0iIzFiNWUyMCIgdHJhbnNmb3JtPSJyb3RhdGUoLTQwIDE0OCAxMzUpIi8+CjxlbGxpcHNlIGN4PSIxNDgiIGN5PSIxMzMiIHJ4PSIyMSIgcnk9IjEyIiBmaWxsPSIjMmU3ZDMyIiB0cmFuc2Zvcm09InJvdGF0ZSgtNDAgMTQ4IDEzMykiLz4KPGVsbGlwc2UgY3g9IjI1MCIgY3k9IjEyMCIgcng9IjI0IiByeT0iMTQiIGZpbGw9IiMxYjVlMjAiIHRyYW5zZm9ybT0icm90YXRlKDM1IDI1MCAxMjApIi8+CjxlbGxpcHNlIGN4PSIyNTAiIGN5PSIxMTgiIHJ4PSIyMSIgcnk9IjEyIiBmaWxsPSIjMzg4ZTNjIiB0cmFuc2Zvcm09InJvdGF0ZSgzNSAyNTAgMTE4KSIvPgo8ZWxsaXBzZSBjeD0iMTUwIiBjeT0iMTAwIiByeD0iMjIiIHJ5PSIxMyIgZmlsbD0iIzMzNjkxZSIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IDE1MCAxMDApIi8+CjxlbGxpcHNlIGN4PSIxNTAiIGN5PSI5OCIgcng9IjE5IiByeT0iMTEiIGZpbGw9IiM0M2EwNDciIHRyYW5zZm9ybT0icm90YXRlKC0zNSAxNTAgOTgpIi8+CjxlbGxpcHNlIGN4PSIyNDciIGN5PSI5MiIgcng9IjIyIiByeT0iMTMiIGZpbGw9IiMyZTdkMzIiIHRyYW5zZm9ybT0icm90YXRlKDMwIDI0NyA5MikiLz4KPGVsbGlwc2UgY3g9IjI0NyIgY3k9IjkwIiByeD0iMTkiIHJ5PSIxMSIgZmlsbD0iIzM4OGUzYyIgdHJhbnNmb3JtPSJyb3RhdGUoMzAgMjQ3IDkwKSIvPgo8IS0tIHB1cnBsZSBmbG93ZXIgc3Bpa2UgYXQgdG9wIC0tPgo8bGluZSB4MT0iMjAwIiB5MT0iMTAwIiB4Mj0iMjAwIiB5Mj0iNTUiIHN0cm9rZT0iIzdiMWZhMiIgc3Ryb2tlLXdpZHRoPSIzIi8+CjxlbGxpcHNlIGN4PSIyMDAiIGN5PSI2OCIgcng9IjUiIHJ5PSI4IiBmaWxsPSIjOWMyN2IwIi8+CjxlbGxpcHNlIGN4PSIyMDAiIGN5PSI1OCIgcng9IjQiIHJ5PSI3IiBmaWxsPSIjN2IxZmEyIi8+CjxjaXJjbGUgY3g9IjE5NSIgY3k9IjcyIiByPSIzIiBmaWxsPSIjY2U5M2Q4Ii8+CjxjaXJjbGUgY3g9IjIwNSIgY3k9IjY1IiByPSIzIiBmaWxsPSIjYmE2OGM4Ii8+CjxjaXJjbGUgY3g9IjE5NyIgY3k9IjYwIiByPSIzIiBmaWxsPSIjY2U5M2Q4Ii8+Cjwvc3ZnPg==" class="cat-img" alt="tulsi">
+      <div class="cat-body"><h2>🌿 Herbs & Medicinal</h2><p>Natural healing plants you can grow right in your kitchen.</p><span class="cat-arrow">Explore →</span></div>
     </a>
-
+    
     <a href="exotic.html" class="cat-card">
-      <img class="cat-img" src="https://images.unsplash.com/photo-1599598425947-5202edd56fdb?w=600&q=80" alt="Exotic Plants">
-      <div class="cat-body">
-        <h2>🌺 Rare / Exotic Plants</h2>
-        <p>Unique, rare finds from across the globe for true collectors.</p>
-        <span class="cat-arrow">Explore →</span>
-      </div>
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMjYwIj4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyNjAiIGZpbGw9IiNlOGY1ZTkiLz4KPHBhdGggZD0iTTE3MCAyMzIgUTE2NSAyNTggMjAwIDI2MCBRMjM1IDI1OCAyMzAgMjMyIFoiIGZpbGw9IiM1ZDQwMzciLz4KPHJlY3QgeD0iMTYyIiB5PSIyMjIiIHdpZHRoPSI3NiIgaGVpZ2h0PSIxMyIgcng9IjUiIGZpbGw9IiM0ZTM0MmUiLz4KPGxpbmUgeDE9IjE5NSIgeTE9IjIyOCIgeDI9IjE3NSIgeTI9IjE1NSIgc3Ryb2tlPSIjMzM2OTFlIiBzdHJva2Utd2lkdGg9IjUiLz4KPGxpbmUgeDE9IjIwNSIgeTE9IjIyOCIgeDI9IjIyNSIgeTI9IjE1MCIgc3Ryb2tlPSIjMmU3ZDMyIiBzdHJva2Utd2lkdGg9IjUiLz4KPCEtLSBtb25zdGVyYSBsZWFmIHdpdGggaG9sZXMgLSBsZWZ0IC0tPgo8cGF0aCBkPSJNMTc1IDE1OCBRMTIwIDEzMCAxMDUgODUgUTEwMCA2MCAxMjAgNTUgUTE0NSA1MiAxNTUgODAgUTE2NSAxMTAgMTgwIDE0NSBaIiBmaWxsPSIjMWI1ZTIwIi8+CjxwYXRoIGQ9Ik0xNzUgMTU4IFExMjAgMTMwIDEwNSA4NSBRMTAwIDYwIDEyMCA1NSBRMTQ1IDUyIDE1NSA4MCBRMTY1IDExMCAxODAgMTQ1IFoiIGZpbGw9IiMyZTdkMzIiIG9wYWNpdHk9IjAuOCIvPgo8IS0tIGhvbGVzIGluIGxlYWYgLS0+CjxlbGxpcHNlIGN4PSIxMzAiIGN5PSIxMDUiIHJ4PSIxMiIgcnk9IjgiIGZpbGw9IiNlOGY1ZTkiIHRyYW5zZm9ybT0icm90YXRlKC0yMCAxMzAgMTA1KSIvPgo8ZWxsaXBzZSBjeD0iMTQ1IiBjeT0iODAiIHJ4PSIxMCIgcnk9IjciIGZpbGw9IiNlOGY1ZTkiIHRyYW5zZm9ybT0icm90YXRlKC0xNSAxNDUgODApIi8+CjxlbGxpcHNlIGN4PSIxMTgiIGN5PSI3OCIgcng9IjgiIHJ5PSI2IiBmaWxsPSIjZThmNWU5IiB0cmFuc2Zvcm09InJvdGF0ZSgtMjUgMTE4IDc4KSIvPgo8IS0tIG1vbnN0ZXJhIGxlYWYgcmlnaHQgLS0+CjxwYXRoIGQ9Ik0yMjUgMTUzIFEyODAgMTI1IDI5NSA4MCBRMzAwIDU1IDI4MCA1MiBRMjU1IDQ5IDI0NSA3NyBRMjM1IDEwNyAyMjAgMTQwIFoiIGZpbGw9IiMzMzY5MWUiLz4KPHBhdGggZD0iTTIyNSAxNTMgUTI4MCAxMjUgMjk1IDgwIFEzMDAgNTUgMjgwIDUyIFEyNTUgNDkgMjQ1IDc3IFEyMzUgMTA3IDIyMCAxNDAgWiIgZmlsbD0iIzM4OGUzYyIgb3BhY2l0eT0iMC44Ii8+CjxlbGxpcHNlIGN4PSIyNzAiIGN5PSIxMDAiIHJ4PSIxMiIgcnk9IjgiIGZpbGw9IiNlOGY1ZTkiIHRyYW5zZm9ybT0icm90YXRlKDIwIDI3MCAxMDApIi8+CjxlbGxpcHNlIGN4PSIyNTUiIGN5PSI3NSIgcng9IjEwIiByeT0iNyIgZmlsbD0iI2U4ZjVlOSIgdHJhbnNmb3JtPSJyb3RhdGUoMTUgMjU1IDc1KSIvPgo8ZWxsaXBzZSBjeD0iMjgyIiBjeT0iNzUiIHJ4PSI4IiByeT0iNiIgZmlsbD0iI2U4ZjVlOSIgdHJhbnNmb3JtPSJyb3RhdGUoMjUgMjgyIDc1KSIvPgo8IS0tIHZlaW5zIC0tPgo8bGluZSB4MT0iMTc1IiB5MT0iMTU1IiB4Mj0iMTEwIiB5Mj0iOTAiIHN0cm9rZT0iIzFiNWUyMCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxsaW5lIHgxPSIyMjUiIHkxPSIxNTAiIHgyPSIyOTAiIHkyPSI4NSIgc3Ryb2tlPSIjMWI1ZTIwIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+" class="cat-img" alt="monstera">
+      <div class="cat-body"><h2>🌺 Rare / Exotic Plants</h2><p>Unique, rare finds from across the globe for true collectors.</p><span class="cat-arrow">Explore →</span></div>
     </a>
-
   </div>
 </section>
-
-<!-- FOOTER -->
 <footer class="main-footer">
   <h2>📞 Contact Us</h2>
-  <div class="contact-row">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="footer-icon" alt="WhatsApp" onclick="window.open('https://wa.me/923001234567','_blank')">
-    <a href="https://wa.me/923001234567">+92 300 1234567</a>
-  </div>
-  <div class="contact-row">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" class="footer-icon" alt="Email" onclick="window.open('mailto:plantworld@gmail.com')">
-    <a href="mailto:plantworld@gmail.com">plantworld@gmail.com</a>
-  </div>
+  <div class="contact-row"><span style="font-size:28px">📱</span><a href="https://wa.me/923001234567">+92 300 1234567</a></div>
+  <div class="contact-row"><span style="font-size:28px">📧</span><a href="mailto:plantworld@gmail.com">plantworld@gmail.com</a></div>
 </footer>
 <footer class="tagline-footer">
   <p>🌱 Plant World &copy; 2026 — Grow Green, Live Clean</p>
   <p>Made with 💚 for plant lovers everywhere</p>
 </footer>
-
 <script src="script.js"></script>
-</body>
-</html>
+</body></html>
