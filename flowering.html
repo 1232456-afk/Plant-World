@@ -1,30 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant World</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flowering Plants – Plant World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <div class="live-datetime">
+
+<div class="datetime-bar">
   <span id="currentDate"></span>
   <span id="currentTime"></span>
 </div>
-    <header>
-        <h1>🌱 Welcome to Flowering World</h1>
-        <p>See Flowers Around The World Here</p>
-       
-    </header>
+
+<header class="page-header">
+  <a href="home.html" class="back-btn">← Back</a>
+  <h1>🌸 Flowering Plants</h1>
+  <p>Colors and fragrance for your space</p>
+</header>
+
+<div class="search-wrap">
+  <input type="text" id="search" placeholder="🔍 Search flowering plants...">
+</div>
 
     <div class="plants-container">
         
-        <div class="plant-card" onclick="buyPlant('Gul-e-Daudi')">
-        <img src="https://th.bing.com/th/id/OIP.xFnC4nbVZE1sF_eXY1rmHwHaFE?w=215&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Gul-e-Daudi">
+        <div class="plant-card">
+        <div class="img-wrap"><img src="https://th.bing.com/th/id/OIP.xFnC4nbVZE1sF_eXY1rmHwHaFE?w=215&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Gul-e-Daudi"></div>
+            <div class="card-body">
              <h2>Gul-e-Daudi</h2>
             <p class="category">Flowering Plant</p>
-            <div class="info">💧 Low | ☀️ Medium</div>
-        </div>
+            <div class="info"><span>💧 Low</span><span>☀️ Medium</span></div>
+         <button class="buy-btn" onclick="buyPlant('Gul-e-Daudi')">🛒 Buy Now</button>
+    </div>
+            </div>
 
         <div class="plant-card" onclick="buyPlant('Petunia')">
             <img src="https://th.bing.com/th/id/OIP.g3I42UE2aEw17Vy7x1nrNgHaE8?w=240&h=150&c=6&o=7&pid=1.7&rm=3" alt="Petunia">
@@ -372,10 +382,13 @@
 
         
     </div>
-    <script src="script.js"></script>
+  <footer class="tagline-footer">
+  <p>🌱 Plant World &copy; 2026 — Grow Green, Live Clean</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
-
 
 
 
