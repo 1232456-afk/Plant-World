@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant World</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cactus & Succulents – Plant World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="live-datetime">
+
+<div class="datetime-bar">
   <span id="currentDate"></span>
   <span id="currentTime"></span>
 </div>
-    <header>
-        <h1>🌱 Welcome to the Cactus & Succulents Plants World</h1>
-        <p>See Cactus Plants Here</p>
-        
-    </header>
+
+<header class="page-header">
+  <a href="home.html" class="back-btn">← Back</a>
+  <h1>🌵 Cactus & Succulents</h1>
+  <p>Low maintenance, high character</p>
+</header>
+
+<div class="search-wrap">
+  <input type="text" id="search" placeholder="🔍 Search cactus & succulents...">
+</div>
     <div class="plants-container">
-     <div class="plant-card" onclick="buyPlant('Golden Barel Cactus')">
-        <img src="https://th.bing.com/th/id/OIP.RCj3S3vrRUlMjcilX73G4QHaHa?w=195&h=195&c=7&r=0&o=7&pid=1.7&rm=3" alt="golden Barrel">
+     <div class="plant-card">
+        <div class="img-wrap"><img src="https://th.bing.com/th/id/OIP.RCj3S3vrRUlMjcilX73G4QHaHa?w=195&h=195&c=7&r=0&o=7&pid=1.7&rm=3" alt="golden Barrel"></div>
+          <div class="card-body">  
              <h2>Golden Barrel Cactus</h2>
             <p class="category"> Cactus Plants </p>
-            <div class="info">💧 Low | ☀️ High</div>
+            <div class="info"><span>💧 Low</span><span>☀️ High</span></div>
+               <button class="buy-btn" onclick="buyPlant('')">🛒 Buy Now</button>
+    </div>
         </div>
 
         <div class="plant-card" onclick="buyPlant('Aleo Vera')">
@@ -370,6 +380,10 @@
 
     </div>
 
-  <script src="script.js"></script>
+ <footer class="tagline-footer">
+  <p>🌱 Plant World &copy; 2026 — Grow Green, Live Clean</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
