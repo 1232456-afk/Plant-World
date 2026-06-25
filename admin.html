@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plant World – Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--g1:#1a3a2a;--g2:#2d6a4f;--g3:#40916c;--g4:#74c69d;--g5:#b7e4c7;--cream:#f4f9f5;--white:#fff;--red:#e53935}
+body{font-family:'Inter',sans-serif;background:var(--cream);min-height:100vh}
+.bar{background:var(--g1);padding:13px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.bar h1{font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff}
+.bar h1 span{color:var(--g4)}
+.bar-links{display:flex;gap:8px}
+.bar a{color:var(--g5);border:1px solid rgba(116,198,157,.3);padding:6px 14px;border-radius:50px;font-size:12px;font-weight:500;text-decoration:none;background:rgba(116,198,157,.15)}
+.bar a.red{background:rgba(229,57,53,.15);border-color:rgba(229,57,53,.3);color:#ff8a80}
+
+/* setup overlay */
+.overlay{position:fixed;inset:0;background:rgba(20,40,28,.96);display:flex;align-items:center;justify-content:center;z-index:999;padding:16px}
+.setup-box{background:#fff;border-radius:20px;padding:28px 24px;max-width:460px;width:100%}
+.setup-box h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--g1);margin-bottom:6px}
+.setup-box .info{font-size:13px;color:#5a7a62;margin-bottom:18px;line-height:1.6}
+.step-block{background:#f4f9f5;border-left:3px solid var(--g3);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:10px;font-size:13px;color:var(--g1);line-height:1.7}
+.step-block strong{color:var(--g2)}
+.step-block a{color:var(--g3);font-weight:600}
+.step-block code{background:#e8f5e9;color:var(--g2);padding:1px 6px;border-radius:4px;font-size:12px;font-family:monospace}
+
+.field{margin-bottom:12px}
+.field label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--g1);margin-bottom:4px}
+.field input,.field select{width:100%;padding:10px 13px;border:2px solid #d4e8d8;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;color:#1a2418;background:#fff;outline:none;transition:border-color .2s}
+.field input:focus,.field select:focus{border-color:var(--g3)}
+
+.sbtn{width:100%;padding:12px;background:linear-gradient(135deg,var(--g3),var(--g2));color:#fff;border:none;border-radius:50px;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;margin-top:6px;transition:opacity .2s}
+.sbtn:hover{opacity:.88}
+.sbtn:disabled{opacity:.5;cursor:not-allowed}
+
+/* main */
+.wrap{max-width:920px;margin:0 auto;padding:22px 16px 60px;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.box{background:#fff;border-radius:16px;padding:22px;box-shadow:0 3px 18px rgba(26,58,42,.08);border:1px solid rgba(116,198,157,.18)}
+.box h2{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--g1);margin-bottom:3px}
+.box .sub{font-size:12px;color:#6b8f71;margin-bottom:16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* seasons */
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:4px}
+.si{display:flex;align-items:center;gap:7px;background:#f4f9f5;border:2px solid #d4e8d8;border-radius:9px;padding:8px 11px;cursor:pointer;user-select:none;transition:all .2s}
+.si:hover,.si.on{border-color:var(--g3);background:#e8f5e9}
+.si input{display:none}
+.si .em{font-size:17px}
+.si .nm{font-size:12px;font-weight:600;color:var(--g1)}
+.si.on .nm{color:var(--g3)}
+
+/* preview */
+.pc{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 3px 18px rgba(26,58,42,.08);border:1px solid rgba(116,198,157,.18)}
+.pi{width:100%;height:170px;object-fit:cover;display:block}
+.pph{width:100%;height:170px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);display:flex;align-items:center;justify-content:center;font-size:50px}
+.pb{padding:12px 14px 14px}
+.pn{font-family:'Playfair Display',serif;font-size:1rem;color:var(--g1);margin-bottom:2px}
+.pcat{font-size:11px;font-style:italic;color:#6b8f71;margin-bottom:6px}
+.ptags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.ptags span{background:rgba(64,145,108,.1);color:var(--g2);padding:2px 8px;border-radius:16px;font-size:11px;font-weight:600}
+.pseas span{background:rgba(201,168,76,.12);color:#8a6914}
+.pbuy{width:100%;padding:8px;background:linear-gradient(135deg,var(--g3),var(--g2));color:#fff;border:none;border-radius:50px;font-size:12px;font-weight:600}
+
+/* status */
+.status{grid-column:1/-1;border-radius:12px;padding:14px 18px;font-size:13px;font-weight:500;display:none}
+.status.ok{background:#e8f5e9;color:var(--g1);border:1px solid rgba(64,145,108,.25);display:block}
+.status.err{background:#ffebee;color:#c62828;border:1px solid rgba(229,57,53,.25);display:block}
+.status.loading{background:#f4f9f5;color:var(--g2);border:1px solid rgba(116,198,157,.25);display:block}
+
+/* plant list */
+.full{grid-column:1/-1}
+.plist{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:12px}
+.pm{background:#fff;border-radius:11px;overflow:hidden;border:1px solid rgba(116,198,157,.2);box-shadow:0 2px 8px rgba(26,58,42,.05)}
+.pm img{width:100%;height:110px;object-fit:cover;display:block}
+.pm-body{padding:9px 11px 11px}
+.pm-body h3{font-size:12px;font-weight:600;color:var(--g1);margin-bottom:2px}
+.pm-body p{font-size:11px;color:#6b8f71}
+.pm-del{float:right;background:none;border:none;color:#ddd;cursor:pointer;font-size:14px;transition:color .2s;margin-top:-1px}
+.pm-del:hover{color:var(--red)}
+.empty-msg{color:#9ab09d;font-size:13px;padding:20px;text-align:center;grid-column:1/-1}
+
+@media(max-width:580px){.wrap{grid-template-columns:1fr}.row2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- Setup Overlay -->
+<div class="overlay" id="overlay">
+  <div class="setup-box">
+    <h2>🌿 Ek Baar Setup Karo</h2>
+    <p class="info">GitHub token se admin panel directly aapki HTML files update karta hai — koi extra service nahi.</p>
+
+    <div class="step-block">
+      <strong>Step 1:</strong> <a href="https://github.com/settings/tokens/new" target="_blank">github.com/settings/tokens/new</a> kholo
+    </div>
+    <div class="step-block">
+      <strong>Step 2:</strong> Note mein likho <code>PlantWorld</code> → Expiration: <code>No expiration</code> → Scope mein sirf <code>repo</code> tick karo → <strong>Generate token</strong>
+    </div>
+    <div class="step-block">
+      <strong>Step 3:</strong> Token copy karo (ghp_xxxx...) aur neeche paste karo
+    </div>
+
+    <div class="field">
+      <label>GitHub Username</label>
+      <input id="s-user" placeholder="">
+    </div>
+    <div class="field">
+      <label>Repository Name</label>
+      <input id="s-repo" placeholder="">
+    </div>
+    <div class="field">
+      <label>GitHub Token (ghp_...)</label>
+      <input id="s-token" type="password" placeholder="">
+    </div>
+    <button class="sbtn" onclick="saveSetup()">✅ Save Karo — Admin Panel Kholo</button>
+  </div>
+</div>
+
+<!-- Topbar -->
+<div class="bar">
+  <h1>🌿 Plant World — <span>Admin Panel</span></h1>
+  <div class="bar-links">
+    <a href="home.html" target="_blank">🌐 Website</a>
+    <a class="red" href="#" onclick="resetSetup()">⚙️ Reset</a>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="wrap">
+
+  <!-- Status -->
+  <div class="status" id="status"></div>
+
+  <!-- Form -->
+  <div class="box">
+    <h2>➕ Naya Plant Add Karo</h2>
+    <p class="sub">Form fill karo — GitHub file auto update hogi</p>
+
+    <div class="field">
+      <label>Plant ka Naam *</label>
+      <input id="f-name" placeholder="e.g. Purple Rose, Neem" oninput="prev()">
+    </div>
+    <div class="field">
+      <label>Category *</label>
+      <select id="f-cat" onchange="prev()">
+        <option value="">— Category chuniye —</option>
+        <option value="indoor">🪴 Indoor Plants</option>
+        <option value="outdoor">🌳 Outdoor Plants</option>
+        <option value="cactus">🌵 Cactus & Succulents</option>
+        <option value="flowering">🌸 Flowering Plants</option>
+        <option value="herbs">🌿 Herbs & Medicinal</option>
+        <option value="exotic">🌺 Rare / Exotic Plants</option>
+      </select>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Paani *</label>
+        <select id="f-water" onchange="prev()">
+          <option value="">—</option>
+          <option>Very Low</option><option>Low</option><option>Medium</option>
+          <option>High</option><option>Very High</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Dhoop *</label>
+        <select id="f-sun" onchange="prev()">
+          <option value="">—</option>
+          <option>Low</option><option>Low to Medium</option><option>Medium</option>
+          <option>Medium to High</option><option>High</option><option>Indirect Light</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Mausam</label>
+      <div class="sg">
+        <div class="si" onclick="togS(this,'spring')"><input type="checkbox"><span class="em">🌸</span><span class="nm">Spring</span></div>
+        <div class="si" onclick="togS(this,'summer')"><input type="checkbox"><span class="em">☀️</span><span class="nm">Summer</span></div>
+        <div class="si" onclick="togS(this,'autumn')"><input type="checkbox"><span class="em">🍂</span><span class="nm">Autumn</span></div>
+        <div class="si" onclick="togS(this,'winter')"><input type="checkbox"><span class="em">❄️</span><span class="nm">Winter</span></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Image URL *</label>
+      <input id="f-img" type="url" placeholder="https://example.com/plant.jpg" oninput="prev()">
+    </div>
+    <button class="sbtn" id="add-btn" onclick="addPlant()">🌱 Plant Add Karo</button>
+  </div>
+
+  <!-- Preview -->
+  <div>
+    <div class="box">
+      <h2>👁️ Preview</h2>
+      <p class="sub">Card kuch aisa dikhega</p>
+      <div class="pc">
+        <div id="p-img"><div class="pph">🌿</div></div>
+        <div class="pb">
+          <div class="pn" id="p-name">Plant ka Naam</div>
+          <div class="pcat" id="p-cat">Category</div>
+          <div class="ptags" id="p-tags">
+            <span id="p-water">💧 Water</span>
+            <span id="p-sun">☀️ Sun</span>
+          </div>
+          <div class="ptags pseas" id="p-seas"></div>
+          <button class="pbuy">🛒 Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Saved Plants -->
+  <div class="box full">
+    <h2>🌿 Saved Plants</h2>
+    <p class="sub">Yeh plants aapki website pe live hain</p>
+    <div class="plist" id="plist"><div class="empty-msg">Loading...</div></div>
+  </div>
+
+</div>
+
+<script>
+var CFG = {user:'',repo:'',token:''};
+var seasons = [];
+var PLANTS_KEY = 'pw_plants';
+var catLabel = {indoor:'Indoor Plant',outdoor:'Outdoor Plant',cactus:'Cactus & Succulent',flowering:'Flowering Plant',herbs:'Herbs & Medicinal',exotic:'Rare / Exotic Plant'};
+var catFile  = {indoor:'indoor.html',outdoor:'outdoor.html',cactus:'cactus.html',flowering:'flowering.html',herbs:'herbs.html',exotic:'exotic.html'};
+var sEmoji   = {spring:'🌸',summer:'☀️',autumn:'🍂',winter:'❄️'};
+
+/* ── Setup ── */
+function saveSetup(){
+  var u=v('s-user').trim(), r=v('s-repo').trim(), t=v('s-token').trim();
+  if(!u||!r||!t){alert('Teeno fields zaroori hain!');return;}
+  localStorage.setItem('pw_user',u);
+  localStorage.setItem('pw_repo',r);
+  localStorage.setItem('pw_token',t);
+  CFG={user:u,repo:r,token:t};
+  id('overlay').style.display='none';
+  renderList();
+}
+function resetSetup(){
+  if(!confirm('Setup reset karna chahte ho?'))return;
+  ['pw_user','pw_repo','pw_token'].forEach(function(k){localStorage.removeItem(k);});
+  location.reload();
+}
+
+/* ── GitHub: file read ── */
+function ghGet(file){
+  return fetch('https://api.github.com/repos/'+CFG.user+'/'+CFG.repo+'/contents/'+file,{
+    headers:{'Authorization':'token '+CFG.token,'Accept':'application/vnd.github.v3+json'}
+  }).then(function(r){return r.json();});
+}
+
+/* ── GitHub: file update ── */
+function ghPut(file, newContent, sha){
+  return fetch('https://api.github.com/repos/'+CFG.user+'/'+CFG.repo+'/contents/'+file,{
+    method:'PUT',
+    headers:{'Authorization':'token '+CFG.token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+    body: JSON.stringify({
+      message: 'Add plant: '+file,
+      content: btoa(unescape(encodeURIComponent(newContent))),
+      sha: sha
+    })
+  }).then(function(r){return r.json();});
+}
+
+/* ── Build card HTML ── */
+function buildCard(p){
+  var seas = '';
+  if(p.seasons && p.seasons.length){
+    var tags = p.seasons.map(function(s){return '<span>'+(sEmoji[s]||'')+' '+s[0].toUpperCase()+s.slice(1)+'</span>';}).join('');
+    seas = '\n      <div class="info">'+tags+'</div>';
+  }
+  return '\n  <div class="plant-card">\n'
+    +'    <div class="img-wrap"><img src="'+p.imgUrl+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;" loading="lazy" onerror="this.parentNode.innerHTML=\'<div style=height:100%;display:flex;align-items:center;justify-content:center;font-size:52px;background:#e8f5e9>🌿</div>\'"></div>\n'
+    +'    <div class="card-body">\n'
+    +'      <h2>'+p.name+'</h2>\n'
+    +'      <p class="category">'+(catLabel[p.category]||p.category)+'</p>\n'
+    +'      <div class="info"><span>💧 '+p.water+'</span><span>☀️ '+p.sun+'</span></div>'+seas+'\n'
+    +'      <button class="buy-btn" onclick="buyPlant(\''+p.name+'\')">🛒 Buy Now</button>\n'
+    +'    </div>\n'
+    +'  </div>';
+}
+
+/* ── Add Plant ── */
+function addPlant(){
+  var name=v('f-name').trim(), cat=v('f-cat'), water=v('f-water'), sun=v('f-sun'), img=v('f-img').trim();
+  if(!name||!cat||!water||!sun||!img){setStatus('❌ Saari fields fill karo!','err');return;}
+
+  var btn=id('add-btn');
+  btn.disabled=true; btn.textContent='⏳ GitHub update ho raha hai...';
+  setStatus('⏳ GitHub file update ho rahi hai — thoda wait karo...','loading');
+
+  var file = catFile[cat];
+  var plant = {name:name,category:cat,water:water,sun:sun,seasons:seasons.slice(),imgUrl:img};
+
+  // 1. GitHub se file ka content + sha lo
+  ghGet(file).then(function(data){
+    if(!data.content){
+      setStatus('❌ File nahi mili: '+file+' — repo name check karo','err');
+      btn.disabled=false; btn.innerHTML='🌱 Plant Add Karo'; return;
+    }
+
+    // 2. Decode content
+    var decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+
+    // 3. Marker dhundho aur card insert karo
+    var marker = '<!-- NEW_PLANTS_HERE -->';
+    if(decoded.indexOf(marker) === -1){
+      setStatus('❌ Marker nahi mila file mein — updated HTML files use karo','err');
+      btn.disabled=false; btn.innerHTML='🌱 Plant Add Karo'; return;
+    }
+
+    var newContent = decoded.replace(marker, buildCard(plant)+'\n'+marker);
+
+    // 4. GitHub pe save karo
+    ghPut(file, newContent, data.sha).then(function(res){
+      if(res.content){
+        // Local list mein bhi save karo
+        var list = getSaved();
+        list.unshift(plant);
+        localStorage.setItem(PLANTS_KEY, JSON.stringify(list));
+        renderList();
+        resetForm();
+        setStatus('✅ '+name+' — '+file+' mein add ho gaya! 30 second mein website pe live hoga 🎉','ok');
+      } else {
+        setStatus('❌ GitHub error: '+(res.message||JSON.stringify(res)),'err');
+      }
+    }).catch(function(e){setStatus('❌ Network error: '+e.message,'err');});
+
+  }).catch(function(e){setStatus('❌ GitHub connect nahi hua: '+e.message,'err');})
+  .finally(function(){btn.disabled=false; btn.innerHTML='🌱 Plant Add Karo';});
+}
+
+/* ── Saved list ── */
+function getSaved(){ try{return JSON.parse(localStorage.getItem(PLANTS_KEY))||[];}catch{return[];} }
+
+function renderList(){
+  var list=getSaved();
+  var el=id('plist');
+  if(!list.length){el.innerHTML='<div class="empty-msg">Abhi koi plant nahi — upar form fill karo!</div>';return;}
+  el.innerHTML=list.map(function(p,i){
+    var seas=p.seasons&&p.seasons.length?p.seasons.map(function(s){return (sEmoji[s]||'')+' '+s;}).join(' '):'';
+    return '<div class="pm">'
+      +'<img src="'+p.imgUrl+'" onerror="this.style.display=\'none\'">'
+      +'<div class="pm-body">'
+      +'<button class="pm-del" onclick="delPlant('+i+')" title="Delete">✕</button>'
+      +'<h3>'+p.name+'</h3>'
+      +'<p>'+(catLabel[p.category]||p.category)+(seas?' | '+seas:'')+'</p>'
+      +'</div></div>';
+  }).join('');
+}
+
+function delPlant(i){
+  if(!confirm('Delete karna chahte ho?'))return;
+  var list=getSaved(); list.splice(i,1);
+  localStorage.setItem(PLANTS_KEY,JSON.stringify(list));
+  renderList();
+}
+
+/* ── Season toggle ── */
+function togS(el,val){
+  el.classList.toggle('on');
+  var cb=el.querySelector('input'); cb.checked=!cb.checked;
+  seasons=cb.checked?seasons.concat(val):seasons.filter(function(s){return s!==val;});
+  prev();
+}
+
+/* ── Live Preview ── */
+function prev(){
+  var name=v('f-name')||'Plant ka Naam', cat=v('f-cat'), water=v('f-water')||'Water', sun=v('f-sun')||'Sun', img=v('f-img');
+  id('p-name').textContent=name;
+  id('p-cat').textContent=catLabel[cat]||'Category';
+  id('p-water').textContent='💧 '+water;
+  id('p-sun').textContent='☀️ '+sun;
+  id('p-seas').innerHTML=seasons.map(function(s){return '<span>'+(sEmoji[s]||'')+' '+s+'</span>';}).join('');
+  id('p-img').innerHTML=img?'<img class="pi" src="'+img+'" onerror="this.parentNode.innerHTML=\'<div class=pph>🌿</div>\'">':'<div class="pph">🌿</div>';
+}
+
+/* ── Reset form ── */
+function resetForm(){
+  ['f-name','f-cat','f-water','f-sun','f-img'].forEach(function(x){id(x).value='';});
+  seasons=[];
+  document.querySelectorAll('.si').forEach(function(el){el.classList.remove('on');el.querySelector('input').checked=false;});
+  prev();
+}
+
+/* ── Status ── */
+function setStatus(msg,type){var el=id('status');el.textContent=msg;el.className='status '+type;}
+
+/* ── Helpers ── */
+function id(x){return document.getElementById(x);}
+function v(x){return id(x).value;}
+
+/* ── Init ── */
+CFG.user  = localStorage.getItem('pw_user')||'';
+CFG.repo  = localStorage.getItem('pw_repo')||'';
+CFG.token = localStorage.getItem('pw_token')||'';
+if(CFG.user && CFG.repo && CFG.token){
+  id('overlay').style.display='none';
+  renderList();
+}
+</script>
+</body>
+</html>
