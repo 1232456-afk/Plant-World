@@ -104,15 +104,15 @@ body{font-family:'Inter',sans-serif;background:var(--cream);min-height:100vh}
 
     <div class="field">
       <label>GitHub Username</label>
-      <input id="s-user" placeholder="">
+      <input id="s-user" placeholder="e.g. saifullah123">
     </div>
     <div class="field">
       <label>Repository Name</label>
-      <input id="s-repo" placeholder="">
+      <input id="s-repo" placeholder="e.g. Plant-World">
     </div>
     <div class="field">
       <label>GitHub Token (ghp_...)</label>
-      <input id="s-token" type="password" placeholder="">
+      <input id="s-token" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
     </div>
     <button class="sbtn" onclick="saveSetup()">✅ Save Karo — Admin Panel Kholo</button>
   </div>
@@ -123,6 +123,8 @@ body{font-family:'Inter',sans-serif;background:var(--cream);min-height:100vh}
   <h1>🌿 Plant World — <span>Admin Panel</span></h1>
   <div class="bar-links">
     <a href="home.html" target="_blank">🌐 Website</a>
+    <a href="#" onclick="fixAllFiles()" style="background:rgba(201,168,76,.18);border-color:rgba(201,168,76,.3);color:#ffe082">🔧 Files Fix Karo</a>
+    <a href="#" onclick="document.getElementById('season-modal').style.display='flex'" style="background:rgba(116,198,157,.18);border-color:rgba(116,198,157,.3);color:#b7e4c7">🍂 Season Update</a>
     <a class="red" href="#" onclick="resetSetup()">⚙️ Reset</a>
   </div>
 </div>
@@ -377,6 +379,25 @@ function prev(){
 }
 
 /* ── Reset form ── */
+function updateHomeCount(cat) {
+  ghGet('home.html').then(function(data) {
+    if (!data.content) return;
+    var decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+    ghGet(catFile[cat]).then(function(catData) {
+      if (!catData.content) return;
+      var catContent = decodeURIComponent(escape(atob(catData.content.replace(/\n/g,''))));
+      var count = (catContent.match(/class="plant-card"/g) || []).length;
+      var newDecoded = decoded.replace(
+        new RegExp('id="cnt-' + cat + '">[^<]*</span>'),
+        'id="cnt-' + cat + '">' + count + ' plants</span>'
+      );
+      if (newDecoded !== decoded) {
+        ghPut('home.html', newDecoded, data.sha).catch(function(){});
+      }
+    });
+  });
+}
+
 function resetForm(){
   ['f-name','f-cat','f-water','f-sun','f-img'].forEach(function(x){id(x).value='';});
   seasons=[];
@@ -399,6 +420,200 @@ if(CFG.user && CFG.repo && CFG.token){
   id('overlay').style.display='none';
   renderList();
 }
+
+// ── Fix all category files: add NEW_PLANTS_HERE marker ──
+function fixAllFiles() {
+  if (!confirm('Yeh saari 6 category files mein marker add karega. Ek baar karo bas. Continue?')) return;
+  
+  var files = Object.values(catFile);
+  var done = 0;
+  var failed = [];
+  
+  setStatus('⏳ Files fix ho rahi hain (0/' + files.length + ')...', 'loading');
+  
+  files.forEach(function(fname) {
+    ghGet(fname).then(function(data) {
+      if (!data.content) { failed.push(fname); check(); return; }
+      
+      var decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+      
+      // Already has marker? Skip
+      if (decoded.indexOf('<!-- NEW_PLANTS_HERE -->') !== -1) {
+        done++; check(); return;
+      }
+      
+      // Find </div> before <footer and insert marker
+      var footerPos = decoded.indexOf('<footer');
+      if (footerPos < 0) { failed.push(fname); check(); return; }
+      
+      var insertPos = decoded.lastIndexOf('</div>', footerPos);
+      if (insertPos < 0) { failed.push(fname); check(); return; }
+      
+      var fixed = decoded.slice(0, insertPos) + '<!-- NEW_PLANTS_HERE -->
+' + decoded.slice(insertPos);
+      
+      ghPut(fname, fixed, data.sha).then(function(res) {
+        if (res.content) { done++; } else { failed.push(fname); }
+        check();
+      }).catch(function() { failed.push(fname); check(); });
+      
+    }).catch(function() { failed.push(fname); check(); });
+  });
+  
+  function check() {
+    var total = done + failed.length;
+    setStatus('⏳ Files fix ho rahi hain (' + total + '/' + files.length + ')...', 'loading');
+    if (total === files.length) {
+      if (failed.length === 0) {
+        setStatus('✅ Saari ' + files.length + ' files fix ho gayi! Ab plants add kar sako ge 🎉', 'ok');
+      } else {
+        setStatus('⚠️ ' + done + ' files fix hui, ' + failed.length + ' fail: ' + failed.join(', '), 'err');
+      }
+    }
+  }
+}
+
+
+// ── Season Manager ──
+var smCatSha = '';
+var smCatContent = '';
+var sEmojiFull = {spring:'🌸 Spring',summer:'☀️ Summer',autumn:'🍂 Autumn',winter:'❄️ Winter'};
+
+function loadSeasonPlants() {
+  var cat = document.getElementById('sm-cat').value;
+  var listEl = document.getElementById('sm-plants-list');
+  var saveBtn = document.getElementById('sm-save-btn');
+  var statusEl = document.getElementById('sm-status');
+  
+  if (!cat) { listEl.innerHTML = ''; saveBtn.style.display='none'; return; }
+  
+  listEl.innerHTML = '<p style="color:#6b8f71;font-size:13px">⏳ Plants load ho rahi hain...</p>';
+  statusEl.textContent = '';
+  saveBtn.style.display = 'none';
+  
+  ghGet(catFile[cat]).then(function(data) {
+    if (!data.content) { listEl.innerHTML = '<p style="color:red">File load nahi hui</p>'; return; }
+    
+    smCatSha = data.sha;
+    smCatContent = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+    
+    // Extract all plant names from h2 tags inside plant-cards
+    var cardRegex = /<div class="plant-card"[^>]*>[\s\S]*?<h2>(.*?)<\/h2>[\s\S]*?<div class="info seasons">([\s\S]*?)<\/div>|<div class="plant-card"[^>]*>[\s\S]*?<h2>(.*?)<\/h2>/g;
+    
+    // Simpler: get all h2 inside plant-cards
+    var names = [];
+    var tmp = smCatContent;
+    var cardSplit = tmp.split('<div class="plant-card">');
+    cardSplit.shift(); // remove before first card
+    
+    cardSplit.forEach(function(chunk, i) {
+      var h2match = chunk.match(/<h2>(.*?)<\/h2>/);
+      if (!h2match) return;
+      var name = h2match[1];
+      
+      // Check existing seasons
+      var seasMatch = chunk.match(/<div class="info seasons">([\s\S]*?)<\/div>/);
+      var existingSeasons = [];
+      if (seasMatch) {
+        ['spring','summer','autumn','winter'].forEach(function(s) {
+          if (seasMatch[1].indexOf(s.charAt(0).toUpperCase()+s.slice(1)) !== -1) existingSeasons.push(s);
+        });
+      }
+      names.push({name: name, seasons: existingSeasons, idx: i});
+    });
+    
+    if (!names.length) { listEl.innerHTML = '<p style="color:#6b8f71;font-size:13px">Koi plant nahi mila</p>'; return; }
+    
+    var html = names.map(function(p) {
+      var checks = ['spring','summer','autumn','winter'].map(function(s) {
+        var checked = p.seasons.indexOf(s) !== -1 ? 'checked' : '';
+        var emoji = {spring:'🌸',summer:'☀️',autumn:'🍂',winter:'❄️'}[s];
+        return '<label style="display:inline-flex;align-items:center;gap:4px;margin-right:10px;font-size:13px;cursor:pointer">'
+          +'<input type="checkbox" value="'+s+'" '+checked+' data-plant="'+p.name+'" style="width:15px;height:15px"> '+emoji+' '+s+'</label>';
+      }).join('');
+      
+      return '<div style="background:#f4f9f5;border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid #d4e8d8">'
+        +'<div style="font-weight:600;color:#1a3a2a;font-size:14px;margin-bottom:8px">🌿 '+p.name+'</div>'
+        +'<div>'+checks+'</div>'
+        +'</div>';
+    }).join('');
+    
+    listEl.innerHTML = html;
+    saveBtn.style.display = 'block';
+    
+  }).catch(function(e) { listEl.innerHTML = '<p style="color:red">Error: '+e.message+'</p>'; });
+}
+
+function saveAllSeasons() {
+  var cat = document.getElementById('sm-cat').value;
+  if (!cat || !smCatContent) return;
+  
+  var btn = document.getElementById('sm-save-btn');
+  var statusEl = document.getElementById('sm-status');
+  btn.disabled = true;
+  btn.textContent = '⏳ Saving...';
+  statusEl.textContent = '';
+  
+  // Collect all plant seasons from checkboxes
+  var plantSeasons = {};
+  document.querySelectorAll('#sm-plants-list input[type=checkbox]').forEach(function(cb) {
+    var plant = cb.getAttribute('data-plant');
+    if (!plantSeasons[plant]) plantSeasons[plant] = [];
+    if (cb.checked) plantSeasons[plant].push(cb.value);
+  });
+  
+  // Update smCatContent - for each plant, update/add/remove seasons div
+  var updated = smCatContent;
+  var cardParts = updated.split('<div class="plant-card">');
+  var header = cardParts.shift();
+  
+  var newParts = cardParts.map(function(chunk) {
+    var h2match = chunk.match(/<h2>(.*?)<\/h2>/);
+    if (!h2match) return chunk;
+    var plantName = h2match[1];
+    var seasons = plantSeasons[plantName] || [];
+    
+    // Build season HTML
+    var seasonHTML = '';
+    if (seasons.length > 0) {
+      var tags = seasons.map(function(s) {
+        var e = {spring:'🌸',summer:'☀️',autumn:'🍂',winter:'❄️'}[s]||'';
+        return '<span>'+e+' '+s.charAt(0).toUpperCase()+s.slice(1)+'</span>';
+      }).join('');
+      seasonHTML = '\n      <div class="info seasons">'+tags+'</div>';
+    }
+    
+    // Remove existing seasons div
+    chunk = chunk.replace(/\n?\s*<div class="info seasons">[\s\S]*?<\/div>/, '');
+    
+    // Add new seasons after water/sun info div
+    if (seasonHTML) {
+      chunk = chunk.replace(/(<div class="info"><span>.*?<\/span><span>.*?<\/span><\/div>)/, '$1'+seasonHTML);
+    }
+    
+    return chunk;
+  });
+  
+  var newContent = header + '<div class="plant-card">' + newParts.join('<div class="plant-card">');
+  
+  ghPut(catFile[cat], newContent, smCatSha).then(function(res) {
+    if (res.content) {
+      statusEl.textContent = '✅ Saved! 30 sec mein website pe update hoga';
+      statusEl.style.color = '#2e7d32';
+      smCatSha = res.content.sha || smCatSha;
+    } else {
+      statusEl.textContent = '❌ Error: ' + (res.message || 'Unknown');
+      statusEl.style.color = 'red';
+    }
+  }).catch(function(e) {
+    statusEl.textContent = '❌ ' + e.message;
+    statusEl.style.color = 'red';
+  }).finally(function() {
+    btn.disabled = false;
+    btn.innerHTML = '💾 Save All Seasons';
+  });
+}
+
 </script>
 </body>
 </html>
